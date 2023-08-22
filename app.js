@@ -11,6 +11,7 @@ startGameButton.addEventListener("click", () => {
     setTimeout(() => {
         cards.forEach((card) => {
             card.classList.add("flipped");
+            card.style.zIndex = "1";
         });
     }, 500);
 
@@ -40,3 +41,29 @@ function shuffleArray(array) {
 }
 
 //
+
+let limit = 0;
+
+cards.forEach((card) => {
+    card.addEventListener("click", () => {
+        limit++;
+        console.log(card.textContent);
+
+        if (limit === 2) {
+            cards.forEach((karta) => {
+                karta.style.zIndex = "-1";
+            });
+
+            setTimeout(() => {
+                cards.forEach((karta) => {
+                    karta.classList.add("flipped");
+                    limit = 0;
+                });
+
+                cards.forEach((karta) => {
+                    karta.style.zIndex = "1";
+                });
+            }, 500);
+        }
+    });
+});

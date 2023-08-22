@@ -66,6 +66,7 @@ header {
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    z-index: 1;
 }
 
 .row {
@@ -89,6 +90,8 @@ header {
     transform-style: preserve-3d;
     transform: perspective(1000px);
     transition: transform 0.5s;
+
+    z-index: -1;
 }
 .card-front,
 .card-back {
