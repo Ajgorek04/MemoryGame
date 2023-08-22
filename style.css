@@ -73,7 +73,6 @@ header {
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    font-size: 10rem;
 }
 
 .card {
@@ -85,10 +84,30 @@ header {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+    position: relative;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    transition: transform 0.5s;
+}
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    backface-visibility: hidden;
+}
+
+.card-front {
+    transform: rotateY(0deg);
 }
 
 .card-back {
-    display: none;
+    transform: rotateY(180deg);
 }
 
 .flipped {

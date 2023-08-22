@@ -8,6 +8,18 @@ startGameButton.addEventListener("click", () => {
     startGameButton.parentElement.style.display = "none";
     game.style.display = "flex";
 
+    setTimeout(() => {
+        cards.forEach((card) => {
+            card.classList.add("flipped");
+        });
+    }, 500);
+
+    cards.forEach((card) => {
+        card.addEventListener("click", () => {
+            card.classList.toggle("flipped");
+        });
+    });
+
     const totalCards = cards.length;
     const cardSymbols = [...symbols, ...symbols];
 
