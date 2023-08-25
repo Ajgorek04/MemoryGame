@@ -3,6 +3,7 @@ const startGameButton = document.querySelector("#startGame");
 const frontCards = document.querySelectorAll(".card-front");
 const cards = document.querySelectorAll(".card");
 const symbols = ["🎄", "❄️", "🧸", "🍪", "🃏"];
+const win = document.querySelector(".win");
 
 startGameButton.addEventListener("click", () => {
     startGameButton.parentElement.style.display = "none";
@@ -75,7 +76,7 @@ cards.forEach((card) => {
             limit = 0;
 
             if (matchedList.length === 5) {
-                console.log("wiem");
+                win.style.display = "flex";
             }
         } else {
             if (limit === 2) {
@@ -98,10 +99,23 @@ cards.forEach((card) => {
                     });
 
                     cards.forEach((karta) => {
-                        karta.style.zIndex = "1";
+                        if (
+                            !karta
+                                .querySelector(".card-front")
+                                .classList.contains("matched")
+                        ) {
+                            karta.style.zIndex = "1";
+                        }
                     });
                 }, 500);
             }
         }
     });
+});
+
+// Play again
+const playAgain = document.querySelector("#playAgain");
+
+playAgain.addEventListener("click", () => {
+    location.reload();
 });
