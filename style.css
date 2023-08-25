@@ -116,3 +116,9 @@ header {
 .flipped {
     transform: rotateY(180deg);
 }
+
+.matched {
+    background-color: #90ee90;
+    border: 2px solid #008000;
+    pointer-events: none;
+}

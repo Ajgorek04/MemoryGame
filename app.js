@@ -45,6 +45,7 @@ function shuffleArray(array) {
 let limit = 0;
 let karta1Text = null;
 let karta2Text = null;
+let matchedList = [];
 
 cards.forEach((card) => {
     card.addEventListener("click", () => {
@@ -52,22 +53,30 @@ cards.forEach((card) => {
 
         if (!karta1Text) {
             karta1 = card.querySelector(".card-front");
+            karta1.parentElement.style.zIndex = "-1";
 
             karta1Text = karta1.textContent;
-            console.log("Pierwsza karta: " + karta1Text);
         } else {
             karta2 = card.querySelector(".card-front");
+            karta2.parentElement.style.zIndex = "-1";
 
             karta2Text = karta2.textContent;
-            console.log("Druga karta: " + karta2Text);
         }
 
         if (karta1Text === karta2Text) {
-            console.log("Karty sa takie same");
+            karta1.classList.add("matched");
+            karta2.classList.add("matched");
+            matchedList.push(karta1Text);
             karta1Text = null;
             karta2Text = null;
 
+            karta1;
+
             limit = 0;
+
+            if (matchedList.length === 5) {
+                console.log("wiem");
+            }
         } else {
             if (limit === 2) {
                 cards.forEach((karta) => {
@@ -78,8 +87,14 @@ cards.forEach((card) => {
 
                 setTimeout(() => {
                     cards.forEach((karta) => {
-                        karta.classList.add("flipped");
-                        limit = 0;
+                        if (
+                            !karta
+                                .querySelector(".card-front")
+                                .classList.contains("matched")
+                        ) {
+                            karta.classList.add("flipped");
+                            limit = 0;
+                        }
                     });
 
                     cards.forEach((karta) => {
