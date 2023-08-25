@@ -43,27 +43,50 @@ function shuffleArray(array) {
 //
 
 let limit = 0;
+let karta1Text = null;
+let karta2Text = null;
 
 cards.forEach((card) => {
     card.addEventListener("click", () => {
         limit++;
-        console.log(card.textContent);
 
-        if (limit === 2) {
-            cards.forEach((karta) => {
-                karta.style.zIndex = "-1";
-            });
+        if (!karta1Text) {
+            karta1 = card.querySelector(".card-front");
 
-            setTimeout(() => {
+            karta1Text = karta1.textContent;
+            console.log("Pierwsza karta: " + karta1Text);
+        } else {
+            karta2 = card.querySelector(".card-front");
+
+            karta2Text = karta2.textContent;
+            console.log("Druga karta: " + karta2Text);
+        }
+
+        if (karta1Text === karta2Text) {
+            console.log("Karty sa takie same");
+            karta1Text = null;
+            karta2Text = null;
+
+            limit = 0;
+        } else {
+            if (limit === 2) {
                 cards.forEach((karta) => {
-                    karta.classList.add("flipped");
-                    limit = 0;
+                    karta.style.zIndex = "-1";
+                    karta1Text = null;
+                    karta2Text = null;
                 });
 
-                cards.forEach((karta) => {
-                    karta.style.zIndex = "1";
-                });
-            }, 500);
+                setTimeout(() => {
+                    cards.forEach((karta) => {
+                        karta.classList.add("flipped");
+                        limit = 0;
+                    });
+
+                    cards.forEach((karta) => {
+                        karta.style.zIndex = "1";
+                    });
+                }, 500);
+            }
         }
     });
 });
